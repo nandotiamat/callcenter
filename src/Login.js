@@ -7,8 +7,7 @@ import { UserContext } from "./UserContext";
 import useAuth from "./hooks/useAuth";
 
 export default function Login() {
-  const { user, setUser } = useAuth() 
-  // const { user, setUser } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const [error, setError] = useState("")
   const usernameDipendenteRef = useRef();
   const passwordRef = useRef();
@@ -31,8 +30,9 @@ export default function Login() {
       }
     })
       .then((response) => {
-        setUser(response.data["user"])
         window.localStorage.setItem("JWT", response.data["jwt"])
+        window.localStorage.setItem("user", JSON.stringify(response.data["user"]))
+        setUser(response.data["user"])
         navigate("/", { replace: true })
       })
       .catch((error) => {

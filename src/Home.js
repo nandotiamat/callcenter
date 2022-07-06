@@ -1,39 +1,22 @@
-import axios from "axios";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { FaDatabase, FaFile, FaFileExcel, FaPhone } from "react-icons/fa";
 import { UserContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
-import useAuth from "./hooks/useAuth";
 export default function Home() {
-  // const { user, setUser } = useContext(UserContext)
-  const {user, setUser} = useAuth()
+  const { user } = useContext(UserContext)
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   axios.get("http://localhost:80/api/index.php", {
-  //     headers: {
-  //       Authorization: `Bearer ${window.localStorage.getItem("JWT")}`,
-  //     },
-  //     params: {
-  //       type: "fetch-session"
-  //     }
-  //   }).then((response) => {
-  //     if (response.status == 200) {
-  //       if (!response.data["jwt-validate"]) {
-  //         navigate("/login", { replace: true })
-  //       }
-  //       setUser(response.data["user"])
-  //     }
-  //     console.log(response.data)
-
-  //   })
-  // }, [])
 
   const handleOnClick = (e) => {
     e.preventDefault()
     navigate("/profile")
   }
 
-  return (user &&
+  const handleCallClientButton = (e) => {
+    e.preventDefault()
+    navigate("/compila_esito")
+  }  
+
+  return (
     <section className="hero is-fullheight has-background-danger">
       <div className="p-2">
         <button className="button is-danger is-light" onClick={handleOnClick}>PROFILO</button>
@@ -74,11 +57,11 @@ export default function Home() {
               </div>
             </div>
             <div className="has-text-centered p-2">
-              <button className="button is-danger is-large">Chiama un cliente</button>
+              <button className="button is-danger is-large" onClick={handleCallClientButton}>Chiama un cliente</button>
             </div>
           </div>
         </div>
       </div>
-    </section >
+    </section > 
   )
 }

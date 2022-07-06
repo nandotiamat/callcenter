@@ -2,23 +2,21 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
 
-
-export default function useAuth() {
-    const { user, setUser } = useContext(UserContext)
-    const [isLoading, setIsLoading] = useState(false)
-
+export default function AuthProvider(props) {
+    const [user, setUser] = useState(JSON.parse(window.localStorage.getItem("user")))
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         setIsLoading(true)
-        if (!window.localStorage.getItem("JWT")) {
-            setIsLoading(false)
-            return
-        }
-        if (window.localStorage.getItem("user")) {
-            setUser(JSON.parse(window.localStorage.getItem("user")))
-            setIsLoading(false)
-            return
-        }
         if (!user) {
+            if (!window.localStorage.getItem("JWT")) {
+                setIsLoading(false)
+                return
+            }
+            if (window.localStorage.getItem("user")) {
+                setUser(JSON.parse(window.localStorage.getItem("user")))
+                setIsLoading(false)
+                return
+            }
             axios.get("http://localhost:80/api/index.php", {
                 headers: {
                     Authorization: `Bearer ${window.localStorage.getItem("JWT")}`,
@@ -36,7 +34,7 @@ export default function useAuth() {
             })
         }
         setIsLoading(false)
-    }, [])
+    }, [user])
 
     const logout = () => {
         window.localStorage.removeItem("JWT")
@@ -44,12 +42,11 @@ export default function useAuth() {
         setUser(null)
     }
 
-    const value = {
+    const values = {
         user,
         setUser,
-        logout,
-        isLoading
+        logout
     }
 
-    return value
+    return (<UserContext.Provider value={values}>{!isLoading && props?.children}</UserContext.Provider>);
 }

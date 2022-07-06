@@ -1,11 +1,12 @@
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import useAuth from "./hooks/useAuth";
+import { UserContext } from "./UserContext";
 
 export const Profile = () => {
-  const {user, setUser, logout, isLoading} = useAuth()
+  const {user, logout} = useContext(UserContext)
   const navigate = useNavigate()
+  
   const handleLogout = (e) => {
     e.preventDefault()
     logout()
@@ -13,7 +14,6 @@ export const Profile = () => {
   }
 
   return (
-    user ?
       <section className="hero is-danger is-fullheight" >
         <div className="hero-body">
           <div className="container">
@@ -44,6 +44,5 @@ export const Profile = () => {
             </div>
           </div>
         </div>
-      </section>
-      : <Navigate to="/login" />)
+      </section>)
 } 
