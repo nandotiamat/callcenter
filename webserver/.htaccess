@@ -1,0 +1,7 @@
+RewriteEngine On
+SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+
+# Handle Front Controller...
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
