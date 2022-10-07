@@ -8,6 +8,7 @@ import { Profile } from "./Profile";
 import PrivateOutlet from "./PrivateOutlet";
 import AuthProvider from "./hooks/useAuth";
 import EsitoChiamata from "./EsitoChiamata";
+import Chiamata from "./Chiamata";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
           <Routes>
             <Route path="/" element={<PrivateOutlet />}>
               <Route exact path="/" element={<Home />} />
+              <Route exact path="/chiamata" element={<Chiamata/>} />
               <Route exact path="/compila_esito" element={<EsitoChiamata/>} />
               <Route exact path="/profile" element={<Profile />} />
             </Route>

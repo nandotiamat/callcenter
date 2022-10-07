@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import logo from "./images/logo.png"
 export default function EsitoChiamata() {
   const [error, setError] = useState()
   const handleSubmit = (e) => {
@@ -7,6 +7,13 @@ export default function EsitoChiamata() {
   }
 
   return (
+    <>
+    <nav className='navbar has-background-danger'>
+      <div className='navbar-brand '>
+
+      </div>
+
+    </nav>
     <section className="hero is-danger is-fullheight" >
       <div className="hero-body">
         <div className="container">
@@ -49,5 +56,6 @@ export default function EsitoChiamata() {
         </div>
       </div>
     </section>
+    </>
   )
 }

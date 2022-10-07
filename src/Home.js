@@ -13,7 +13,7 @@ export default function Home() {
 
   const handleCallClientButton = (e) => {
     e.preventDefault()
-    navigate("/compila_esito")
+    navigate("/chiamata")
   }  
 
   return (
