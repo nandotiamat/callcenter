@@ -1,9 +1,49 @@
-import React, { useState } from 'react'
-import logo from "./images/logo.png"
+import axios from 'axios';
+import React, { useRef, useState, useContext } from 'react'
+import { useLocation, useNavigate} from 'react-router-dom';
+import { UserContext } from './UserContext';
+
 export default function EsitoChiamata() {
+  const { user } = useContext(UserContext);
   const [error, setError] = useState()
+  const soldRef = useRef();
+  const descriptionRef = useRef();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const esiti = {
+    "Non risponde": "DIDNT_ANSWER",
+    "Non è interessato": "NOT_INTERESTED",
+    "È interessato": "INTERESTED",
+    "Rifiuta dialogo": "REFUSED_DIALOG",
+    "Venduto": "SOLD"
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(soldRef.current.checked);
+    console.log(descriptionRef.current.value);
+    console.log(location.state.client);
+    console.log(location.state.product);
+    console.log(location.state.corporate);
+
+    const data = {
+      product_id: location.state.product["product_id"],
+      corporate: location.state.product["corporate_id"],
+      client_id: location.state.client["id"],
+      was_sold: soldRef.current.checked ? 1 : 0,
+      user_id: user.user_id,
+      description: descriptionRef.current.value
+    }
+
+    axios.post(
+      "http://localhost:80/api/publish-telefonata.php", {
+        data: data
+      }
+    ).then((response) => {
+      navigate("/");
+      alert("Telefonata registrata con successo.");
+    })
+
   }
 
   return (
@@ -27,7 +67,7 @@ export default function EsitoChiamata() {
                 {error && <span className="has-text-danger">{error}</span>}
                 <div className="field">
                   <label className="checkbox">
-                    <input type="checkbox" className='mr-1' />
+                    <input ref={soldRef} type="checkbox" className='mr-1' />
                     Prodotto venduto
                   </label>
                 </div>
@@ -36,19 +76,19 @@ export default function EsitoChiamata() {
                     Descrizione generica
                   </label>
                   <div className="control">
-                    <div className='select'>
-
-                      <select>
-                        <option>Rifiuta chiamata</option>
-                        <option>Rifiuto dialogo</option>
-                        <option>Segreteria telefonica</option>
-                        <option>Non è interessato</option>
+                    <div className='select is-fullwidth'>
+                      <select ref={descriptionRef}>
+                        <option value={esiti['Non risponde']}>Non risponde</option>
+                        <option value={esiti['È interessato']}>È interessato</option>
+                        <option value={esiti['Non è interessato']}>Non è interessato</option>
+                        <option value={esiti['Rifiuta dialogo']}>Rifiuta dialogo</option>
+                        <option value={esiti['Venduto']}>Venduto</option>
                       </select>
                     </div>
                   </div>
                 </div>
                 <div className="field">
-                  <input type="submit" className="button is-danger is-fullwidth" />
+                  <input type="submit" className="button is-danger is-fullwidth"/>
                 </div>
               </form>
             </div>

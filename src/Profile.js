@@ -23,19 +23,19 @@ export const Profile = () => {
                   <span className="is-size-3">Profilo</span>
                   <div className="p-2">
                     <div>
-                      <strong>Username</strong>: {user["Username"]}
+                      <strong>Username</strong>: {user["username"]}
                     </div>
                     <div>
-                      <strong>Nome</strong>: {user["Nome"]}
+                      <strong>Nome</strong>: {user["name"]}
                     </div>
                     <div>
-                      <strong>Cognome</strong>: {user["Cognome"]}
+                      <strong>Cognome</strong>: {user["surname"]}
                     </div>
                     <div>
-                      <strong>Stipendio</strong>: {user["Stipendio"]}
+                      <strong>Stipendio</strong>: {user["salary"]}
                     </div>
                     <div>
-                      <strong>Data di nascita</strong>: {user["Data di nascita"]}
+                      <strong>Data di nascita</strong>: {user["date_of_birth"]}
                     </div>
                   </div>
                   <button onClick={handleLogout} className="is-fullwidth button is-danger">LOGOUT</button>

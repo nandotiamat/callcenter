@@ -7,7 +7,7 @@ use Firebase\JWT\Key;
 
 require_once('vendor/autoload.php');
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', "1");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: *");
@@ -101,7 +101,7 @@ if (isset($_GET["type"])) {
             $date   = new DateTimeImmutable();
             $expire_at     = $date->modify('+1 year')->getTimestamp();      // Add 1 Year
             $domainName = "localhost";
-            $username   = $userDecoded["Username"];                                           // Retrieved from filtered POST data
+            $username   = $userDecoded["username"];                                           // Retrieved from filtered POST data
             $request_data = [
                 'iat'  => $date->getTimestamp(),         // Issued at: time when the token was generated
                 'iss'  => $domainName,                       // Issuer
@@ -122,6 +122,59 @@ if (isset($_GET["type"])) {
             // echo json_encode($_SESSION["user"]);
             echo json_encode($arrayObject);
         }
+    }
+    
+    // fetch random client
+    if ( $_GET["type"] == "get-random-client"){
+
+        $query = "SELECT id, name, surname, date_of_birth, phone_number FROM `cliente` ORDER BY RAND() LIMIT 1;";
+        $result = queryToDB($query);
+        echo json_encode(mysqli_fetch_object($result));
+
+    }
+    
+    // fetch random product
+    if ( $_GET["type"] == "get-random-product"){
+        $query = "SELECT product_id, name, description, corporate_id FROM `prodotto` ORDER BY RAND() LIMIT 1;";
+        $result = queryToDB($query);
+        echo json_encode(mysqli_fetch_object($result));
+    }
+
+    // fetch corporate given its id
+    if ( $_GET["type"] == "get-corporate"){
+        if (isset($_GET["corporateid"])) {        
+    	    $query = "SELECT name FROM azienda WHERE corporate_id=".$_GET["corporateid"].";";
+       	    $result = queryToDB($query);
+            echo json_encode(mysqli_fetch_object($result));
+        }
+    }
+    
+    // get number of total clients available
+    if ($_GET["type"] == "get-clients-number") {
+    	$query = "SELECT COUNT(*) FROM cliente;";
+   	$result = queryToDb($query);
+    	echo json_encode(mysqli_fetch_object($result));
+    }
+    
+    // get number of total phone call executed by user 
+    if ($_GET["type"] == "get-executed-phonecall-number") {
+    	$query = "SELECT COUNT(*) FROM telefonata WHERE user_id=".$_GET["id"].";";
+   	$result = queryToDb($query);
+    	echo json_encode(mysqli_fetch_object($result));
+    }
+    
+    // get number of total phone call executed by user that turned out into a sale
+    if ($_GET["type"] == "get-positive-outcomes-number") {
+    	$query = "SELECT COUNT(*) FROM telefonata WHERE user_id=".$_GET["id"]." AND was_sold=1;";
+   	$result = queryToDb($query);
+    	echo json_encode(mysqli_fetch_object($result));
+    }
+
+    // get number of total phone call executed by user that turned out into a sale
+    if ($_GET["type"] == "get-negative-outcomes-number") {
+    	$query = "SELECT COUNT(*) FROM telefonata WHERE user_id=".$_GET["id"]." AND was_sold=0;";
+   	$result = queryToDb($query);
+    	echo json_encode(mysqli_fetch_object($result));
     }
 }
 
