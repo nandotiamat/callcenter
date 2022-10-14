@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./Login";
 import Home from "./Home";
-import { UserContext } from "./UserContext";
-import axios from "axios";
 import { Profile } from "./Profile";
 import PrivateOutlet from "./PrivateOutlet";
 import AuthProvider from "./hooks/useAuth";

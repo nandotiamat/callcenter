@@ -78,7 +78,7 @@ export const GestisciUtenti = () => {
                                                             <td >{dipendente.username}</td>
                                                             <td >{dipendente.date_of_birth}</td>
                                                             <td >{dipendente.salary}</td>
-                                                            <td >{dipendente.is_admin == 1 ? <FaCheck color="green"/> : null}</td>
+                                                            <td >{dipendente.is_admin === 1 ? <FaCheck color="green"/> : null}</td>
                                                             {user.is_admin === 1 ? <td><div>{<FaPen onClick={() => handleUpdate(index)} className="mr-5"/> }{<FaTrash onClick={() => handleDelete(index)}/>}</div></td> : null}
                                                         </tr>
                                                     </>

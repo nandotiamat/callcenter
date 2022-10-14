@@ -1,13 +1,10 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import md5 from "md5";
 
 export const CreateUser = () => {
-    const { user } = useContext(UserContext)
     const navigate = useNavigate()
-    const location = useLocation();
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [username, setUsername] = useState("");
@@ -28,7 +25,7 @@ export const CreateUser = () => {
                 password: md5(password),
             }
         }).then((response) => {
-            if (response.data == 1) {
+            if (response.data === 1) {
                 alert(username + " creato con successo.");
             } else {
                 alert("Errore nella creazione dell'utente");

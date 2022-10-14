@@ -70,7 +70,7 @@ export default function Home() {
       <div className="hero-body container">
         <div className="is-flex is-flex-direction-column has-text-white has-text-centered">
           <figure>
-            <img src={logo} width={400}/>
+            <img src={logo} alt="logo" width={400}/>
           </figure>
           <span className="title">Benvenuto, {user ? user["username"] : "nada"}</span>
           <div className="box">

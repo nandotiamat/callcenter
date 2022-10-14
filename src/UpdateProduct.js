@@ -1,10 +1,8 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
 
 export const UpdateProduct = () => {
-    const { user } = useContext(UserContext)
     const navigate = useNavigate()
     const location = useLocation();
     const [name, setName] = useState(location.state.product.product_name);
@@ -21,7 +19,7 @@ export const UpdateProduct = () => {
                 corporate_id: corporateID,
             }
         }).then((response) => {
-            if (response.data == 1) {
+            if (response.data === 1) {
                 alert(name + " aggiornato con successo.");
             } else {
                 alert("Errore nell'aggiornamento del prodotto");

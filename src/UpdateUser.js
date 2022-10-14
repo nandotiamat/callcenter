@@ -1,10 +1,8 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
 
 export const UpdateUser = () => {
-    const { user, logout } = useContext(UserContext)
     const navigate = useNavigate()
     const location = useLocation();
     const [name, setName] = useState(location.state.user.name);

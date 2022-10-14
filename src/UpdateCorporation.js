@@ -1,10 +1,8 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
 
 export const UpdateCorporation = () => {
-    const { user } = useContext(UserContext)
     const navigate = useNavigate()
     const location = useLocation();
     const [name, setName] = useState(location.state.corporation.name);
@@ -17,7 +15,7 @@ export const UpdateCorporation = () => {
                 name: name,
             }
         }).then((response) => {
-            if (response.data == 1) {
+            if (response.data === 1) {
                 alert(name + " aggiornata con successo.");
             } else {
                 alert("Errore nell'aggiornamento dell'azienda.");

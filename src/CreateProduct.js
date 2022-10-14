@@ -1,13 +1,9 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { UserContext } from "./UserContext";
-import md5 from "md5";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const CreateProduct = () => {
-    const { user } = useContext(UserContext)
     const navigate = useNavigate()
-    const location = useLocation();
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [corporateID, setCorporateID] = useState("");
@@ -20,7 +16,7 @@ export const CreateProduct = () => {
                 corporate_id: corporateID,
             }
         }).then((response) => {
-            if (response.data == 1) {
+            if (response.data === 1) {
                 alert(name + " creato con successo.");
             } else {
                 alert("Errore nella creazione del prodotto");

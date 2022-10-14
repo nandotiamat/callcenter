@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from "react"
-import { UserContext } from "./UserContext"
+import React, { useEffect, useState } from "react"
 import { FaUserAlt, FaBuilding } from "react-icons/fa"
 import logo from './images/logo.png';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { CircularProgressbar, CircularProgressbarWithChildren } from "react-circular-progressbar";
+import { CircularProgressbar } from "react-circular-progressbar";
 
 export default function Chiamata() {
 
-    const { user } = useContext(UserContext)
     const [client, setClient] = useState(null);
     const [product, setProduct] = useState(null);
     const [corporate, setCorporate] = useState(null);
@@ -55,7 +53,7 @@ export default function Chiamata() {
             <div className="hero-body container">
                 <div className="is-flex is-flex-direction-column has-text-white has-text-centered">
                     <figure>
-                        <img src={logo} width={400} />
+                        <img src={logo} alt="logo" width={400} />
                     </figure>
                     {client === null || product === null || corporate == null ? <CircularProgressbar value={100}/> :
                         < div className="box is-flex is-justify-content-space-between">

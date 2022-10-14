@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { FaFingerprint, FaLock } from 'react-icons/fa';
 import axios from "axios";
 import md5 from "md5";
@@ -36,7 +36,7 @@ export default function Login() {
       })
       .catch((error) => {
         if (error.response) {
-          if (error.response.status == 401) {
+          if (error.response.status === 401) {
             setError("Credenziali sbagliate.")
           }
         }

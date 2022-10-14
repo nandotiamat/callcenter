@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
-import useAuth from "./hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserContext";
 
 export const Profile = () => {
