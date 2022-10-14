@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaDatabase, FaFile, FaFileExcel, FaPhone } from "react-icons/fa";
 import { UserContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
-import axios, { Axios } from "axios";
+import axios from "axios";
+import logo from './images/logo.png';
+
 export default function Home() {
   const { user } = useContext(UserContext)
   const [numberOfAvailableClients, setNumberOfAvailableClients] = useState(0);
@@ -13,16 +15,15 @@ export default function Home() {
 
   const handleOnClick = (e) => {
     e.preventDefault()
-    navigate("/profile")
+    navigate(e.target.value)
   }
 
   const handleCallClientButton = (e) => {
     e.preventDefault()
     navigate("/chiamata")
-  }  
+  }
 
   useEffect(() => {
-    console.log(user);
     axios.get("http://localhost:80/api/index.php", {
       params: {
         type: "get-clients-number"
@@ -56,12 +57,22 @@ export default function Home() {
   return (
     <section className="hero is-fullheight has-background-danger">
       <div className="p-2">
-        <button className="button is-danger is-light" onClick={handleOnClick}>PROFILO</button>
+        <button className="button is-danger" value={"/profile"} onClick={handleOnClick}>PROFILO</button>
+        <button className="button is-danger" value={"/telefonate"} onClick={handleOnClick}>VISUALIZZA TELEFONATE</button>
+
+        <>
+          <button className="button is-danger" value={"/gestisci_utenti"} onClick={handleOnClick}>{user.is_admin === 1 ? "GESTISCI" : "VISUALIZZA"} UTENTI</button>
+          <button className="button is-danger" value={"/gestisci_prodotti"} onClick={handleOnClick}>{user.is_admin === 1 ? "GESTISCI" : "VISUALIZZA"} PRODOTTI</button>
+          <button className="button is-danger" value={"/gestisci_aziende"} onClick={handleOnClick}>{user.is_admin === 1 ? "GESTISCI" : "VISUALIZZA"} AZIENDE</button>
+        </>
+
       </div>
       <div className="hero-body container">
         <div className="is-flex is-flex-direction-column has-text-white has-text-centered">
-          <h1 className="title">DUNDER MIFFLIN</h1>
-          <span className="subtitle">Benvenuto, {user ? user["username"] : "nada"}</span>
+          <figure>
+            <img src={logo} width={400}/>
+          </figure>
+          <span className="title">Benvenuto, {user ? user["username"] : "nada"}</span>
           <div className="box">
             <div className="is-flex">
               <div className="is-flex">
@@ -99,6 +110,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </section > 
+    </section >
   )
 }

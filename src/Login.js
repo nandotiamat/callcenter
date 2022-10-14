@@ -4,7 +4,6 @@ import { FaFingerprint, FaLock } from 'react-icons/fa';
 import axios from "axios";
 import md5 from "md5";
 import { UserContext } from "./UserContext";
-import useAuth from "./hooks/useAuth";
 
 export default function Login() {
   const { user, setUser } = useContext(UserContext)

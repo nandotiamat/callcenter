@@ -140,6 +140,15 @@ if (isset($_GET["type"])) {
         echo json_encode(mysqli_fetch_object($result));
     }
 
+    // get product given the id
+    if ( $_GET["type"] == "get-product") {
+    	if (isset($_GET["id"])) {
+	    $query = "SELECT * FROM `prodotto` WHERE product_id=".$_GET["id"].";";
+	    $result = queryToDB($query);
+	    echo json_encode(mysqli_fetch_object($result));
+        }
+    }
+
     // fetch corporate given its id
     if ( $_GET["type"] == "get-corporate"){
         if (isset($_GET["corporateid"])) {        
@@ -175,6 +184,53 @@ if (isset($_GET["type"])) {
     	$query = "SELECT COUNT(*) FROM telefonata WHERE user_id=".$_GET["id"]." AND was_sold=0;";
    	$result = queryToDb($query);
     	echo json_encode(mysqli_fetch_object($result));
+    }
+    
+    // get phonecalls info made by a specific user
+    if ($_GET["type"] == "get-phonecalls") {
+    	if(isset($_GET["id"])) {
+	    $query = "SELECT call_id, cliente.name, cliente.surname, outcome, was_sold, date, azienda.name AS corporate_name, prodotto.name AS product_name, cliente.phone_number FROM telefonata INNER JOIN cliente ON telefonata.client_id=cliente.id INNER JOIN prodotto ON telefonata.product_id=prodotto.product_id INNER JOIN azienda ON prodotto.corporate_id=azienda.corporate_id WHERE user_id=".$_GET["id"].";";
+	    $result = queryToDb($query);
+	    echo '[';
+            for ($i=0 ; $i<mysqli_num_rows($result) ; $i++) {
+                echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
+            }
+            echo ']';
+    	}
+    }
+    
+    // get all users
+    if ($_GET["type"] == "get-all-users") {
+    	$query = "SELECT * FROM utente ORDER BY is_admin DESC, user_id ASC;";
+    	$result = queryToDb($query);
+	echo '[';
+	for ($i=0 ; $i<mysqli_num_rows($result) ; $i++) {
+	    echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
+	}
+	echo ']';
+    }
+    
+    // get all products info 
+    if ($_GET["type"] == "get-all-products") {
+	    $query = "SELECT prodotto.name AS product_name, description, product_id, prodotto.corporate_id, azienda.name AS corporate_name FROM prodotto INNER JOIN azienda ON prodotto.corporate_id = azienda.corporate_id;";
+	    $result = queryToDb($query);
+	    echo '[';
+	    for ($i=0 ; $i<mysqli_num_rows($result) ; $i++) {
+		echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
+	    }
+	    echo ']';
+    
+    }
+    
+    // get all corporations
+    if ($_GET["type"] == "get-all-corporations") {
+    	$query = "SELECT * FROM azienda";
+	    $result = queryToDb($query);
+	    echo '[';
+	    for ($i=0 ; $i<mysqli_num_rows($result) ; $i++) {
+		echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
+	    }
+	    echo ']';
     }
 }
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UserContext } from "../UserContext";
 
 export default function AuthProvider(props) {
@@ -25,7 +25,7 @@ export default function AuthProvider(props) {
                     type: "fetch-session"
                 }
             }).then((response) => {
-                if (response.status == 200) {
+                if (response.status === 200) {
                     if (response.data["jwt-validate"]) {
                         setUser(response.data["user"])
                         window.localStorage.setItem("user", JSON.stringify(response.data["user"]))
