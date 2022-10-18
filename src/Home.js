@@ -61,9 +61,9 @@ export default function Home() {
         <button className="button is-danger" value={"/telefonate"} onClick={handleOnClick}>VISUALIZZA TELEFONATE</button>
 
         <>
-          <button className="button is-danger" value={"/gestisci_utenti"} onClick={handleOnClick}>{user.is_admin === 1 ? "GESTISCI" : "VISUALIZZA"} UTENTI</button>
-          <button className="button is-danger" value={"/gestisci_prodotti"} onClick={handleOnClick}>{user.is_admin === 1 ? "GESTISCI" : "VISUALIZZA"} PRODOTTI</button>
-          <button className="button is-danger" value={"/gestisci_aziende"} onClick={handleOnClick}>{user.is_admin === 1 ? "GESTISCI" : "VISUALIZZA"} AZIENDE</button>
+          <button className="button is-danger" value={"/gestisci_utenti"} onClick={handleOnClick}>{user.is_admin == 1 ? "GESTISCI" : "VISUALIZZA"} UTENTI</button>
+          <button className="button is-danger" value={"/gestisci_prodotti"} onClick={handleOnClick}>{user.is_admin == 1 ? "GESTISCI" : "VISUALIZZA"} PRODOTTI</button>
+          <button className="button is-danger" value={"/gestisci_aziende"} onClick={handleOnClick}>{user.is_admin == 1 ? "GESTISCI" : "VISUALIZZA"} AZIENDE</button>
         </>
 
       </div>

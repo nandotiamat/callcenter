@@ -62,7 +62,7 @@ export const GestisciProdotti = () => {
                                                 <th>Nome</th>
                                                 <th>Descrizione</th>
                                                 <th>Azienda</th>
-                                                {user.is_admin === 1 ? <th>Operazioni</th> : null}
+                                                {user.is_admin == 1 ? <th>Operazioni</th> : null}
                                             </tr>
                                         </thead>
 
@@ -76,7 +76,7 @@ export const GestisciProdotti = () => {
                                                             <td >{product.description}</td>
                                                             <td >{product.corporate_name}</td>
                                                             
-                                                            {user.is_admin === 1 ? <td><div>{<FaPen onClick={() => handleUpdate(index)} className="mr-5"/> }{<FaTrash onClick={() => handleDelete(index)}/>}</div></td> : null}
+                                                            {user.is_admin == 1 ? <td><div>{<FaPen onClick={() => handleUpdate(index)} className="mr-5"/> }{<FaTrash onClick={() => handleDelete(index)}/>}</div></td> : null}
                                                         </tr>
                                                     </>
                                                 );
@@ -84,7 +84,7 @@ export const GestisciProdotti = () => {
                                             })}
                                         </tbody>
                                     </table>
-                                    {user.is_admin === 1 ? <button onClick={handleCreateProduct} className="button is-danger is-fullwidth" >Aggiungi prodotto</button> : null}
+                                    {user.is_admin == 1 ? <button onClick={handleCreateProduct} className="button is-danger is-fullwidth" >Aggiungi prodotto</button> : null}
                                 </div>
                             </div>
                         </div>

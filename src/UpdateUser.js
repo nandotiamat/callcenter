@@ -10,7 +10,7 @@ export const UpdateUser = () => {
     const [username, setUsername] = useState(location.state.user.username);
     const [birthday, setBirthday] = useState(location.state.user.date_of_birth);
     const [salary, setSalary] = useState(location.state.user.salary);
-    const [isAdmin, setIsAdmin] = useState(location.state.user.is_admin === 1 ? true : false);
+    const [isAdmin, setIsAdmin] = useState(location.state.user.is_admin == 1 ? true : false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,7 +22,7 @@ export const UpdateUser = () => {
                 username: username,
                 birthday: birthday,
                 salary: salary,
-                is_admin: isAdmin === true ? 1 : 0,
+                is_admin: isAdmin == true ? 1 : 0,
             }
         }).then((response) => {
             if (response.data === 1) {
@@ -64,7 +64,7 @@ export const UpdateUser = () => {
                                     <div className="field">
                                         <label className="label">
                                             Data di nascita
-                                            <input className="input" onChange={event => setBirthday(event.target.value)} type="date" value={birthday} />
+                                            <input className="input" onChange={event => setBirthday(event.target.value)} type="date" min="1900-01-01" max="2005-01-01" value={birthday} />
                                         </label>
                                     </div>
                                     <div className="field">
