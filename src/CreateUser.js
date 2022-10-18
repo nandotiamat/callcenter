@@ -24,7 +24,7 @@ export const CreateUser = () => {
                 username: username,
                 birthday: birthday,
                 salary: salary,
-                is_admin: isAdmin === true ? 1 : 0,
+                is_admin: isAdmin == true ? 1 : 0,
                 password: md5(password),
             }
         }).then((response) => {
@@ -67,7 +67,7 @@ export const CreateUser = () => {
                                     <div className="field">
                                         <label className="label">
                                             Data di nascita
-                                            <input className="input" onChange={event => setBirthday(event.target.value)} type="date" value={birthday} />
+                                            <input className="input" onChange={event => setBirthday(event.target.value)} type="date" min="1900-01-01" max="2005-01-01" value={birthday} />
                                         </label>
                                     </div>
                                     <div className="field">
