@@ -232,6 +232,19 @@ if (isset($_GET["type"])) {
 	    }
 	    echo ']';
     }
+    
+    // get all clients
+    if ($_GET["type"] == "get-all-clients") {
+    	$query = "SELECT * FROM cliente";
+	    $result = queryToDb($query);
+	    echo '[';
+	    for ($i=0 ; $i<mysqli_num_rows($result) ; $i++) {
+		echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
+	    }
+	    echo ']';
+    }
+    
+    
 }
 
 // $method = $_SERVER['REQUEST_METHOD'];
