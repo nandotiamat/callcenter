@@ -88,7 +88,7 @@ export default function Login() {
                     </div>
                   </div>
                   <div className="field">
-                    <input type="submit" className="button is-danger is-fullwidth" disabled={loading} />
+                    <input type="submit" className="button is-danger is-fullwidth" value={"Login"} disabled={loading} />
                   </div>
                 </form>
               </div>

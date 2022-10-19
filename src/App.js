@@ -18,24 +18,11 @@ import { GestisciAziende } from "./GestisciAziende";
 import { CreateCorporation } from "./CreateCorporation";
 import { UpdateCorporation } from "./UpdateCorporation";
 import AdminOutlet from "./AdminOutlet";
+import { GestisciClienti } from "./GestisciClienti";
+import { CreateClient } from "./CreateClient";
+import { UpdateClient } from "./UpdateClient";
 
 function App() {
-
-  // useEffect(() => { axios.get("http://localhost:80/api/index.php", {
-  //     headers: {
-  //       Authorization: `Bearer ${window.localStorage.getItem("JWT")}`,
-  //     },
-  //     params: {
-  //       type: "fetch-session"
-  //     }
-  //   }).then((response) => {
-  //     if (response.status == 200) {
-  //       if (response.data["jwt-validate"]) {
-  //         setUser(response.data["user"])
-  //       }
-  //     }
-  //   })
-  // }, [])
 
   return (
     <>
@@ -51,6 +38,7 @@ function App() {
               <Route exact path="/gestisci_utenti" element={<GestisciUtenti />} />
               <Route exact path="/gestisci_prodotti" element={<GestisciProdotti />} />
               <Route exact path="/gestisci_aziende" element={<GestisciAziende />} />
+              <Route exact path="/gestisci_clienti" element={<GestisciClienti />} />
               <Route path="/" element={<AdminOutlet />}>
                 <Route exact path="/create_user" element={<CreateUser />} />
                 <Route exact path="/update_user" element={<UpdateUser />} />
@@ -58,6 +46,8 @@ function App() {
                 <Route exact path="/update_product" element={<UpdateProduct />} />
                 <Route exact path="/create_corporation" element={<CreateCorporation/>} />
                 <Route exact path="/update_corporation" element={<UpdateCorporation/>} />
+                <Route exact path="/create_client" element={<CreateClient />} />
+                <Route exact path="/update_client" element={<UpdateClient />} />
               </Route>
             </Route>
             <Route path="/login" element={<Login />} />

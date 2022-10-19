@@ -51,7 +51,7 @@ export const Telefonate = () => {
                                                             <td >{telefonata.corporate_name}</td>
                                                             <td >{telefonata.date}</td>
                                                             <td >{telefonata.outcome}</td>
-                                                            <td >{telefonata.was_sold === 1 ? <FaRegGrin size={24} color="green"/> : <FaRegFrown size={24} color="red"/>}</td>
+                                                            <td >{telefonata.was_sold == 1 ? <FaRegGrin size={24} color="green"/> : <FaRegFrown size={24} color="red"/>}</td>
                                                         </tr>
                                                     </>
                                                 );

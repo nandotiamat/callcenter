@@ -88,7 +88,7 @@ export default function EsitoChiamata() {
                   </div>
                 </div>
                 <div className="field">
-                  <input type="submit" className="button is-danger is-fullwidth"/>
+                  <input type="submit" className="button is-danger is-fullwidth" value="Conferma"/>
                 </div>
               </form>
             </div>
